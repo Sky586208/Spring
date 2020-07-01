@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd ">
+
+   <!--创建对象1:空参构造创建 -->
+   <bean name="user" class="com.sky.bean.User" init-method="init" destroy-method="destory"></bean>
+   
+   <!--创建对象2:静态工厂创建 
+                调用UserFactory的createUser方法创建名为user2对象，放入容器
+   -->
+   <bean name="user2" 
+         class="com.sky.b_create.UserFactory"
+         factory-method="createUser"></bean>
+ 
+   <!--创建对象3:实例工厂创建 
+                调用UserFactory的createUser2方法创建名为user3对象，放入容器
+   -->
+   <bean name="user3" 
+         factory-bean="UserFactory"
+         factory-method="createUser2"></bean>
+   <bean name="UserFactory"
+         class="com.sky.b_create.UserFactory"></bean>
+
+</beans>

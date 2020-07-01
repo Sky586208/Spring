@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd ">
+
+  <!--set设值注入： -->
+  <bean name="user" class="com.sky.bean.User">
+  <!--为User对象中名为name的属性注入tom作为值  -->
+  <property name="name" value="tom"></property>
+  <property name="age"  value="18"></property>
+  <property name="car" ref="car"></property>
+  </bean>
+  
+  <!--将Car对象配置到容器中  -->
+  <bean name="car" class="com.sky.bean.Car">
+  <property name="name" value="兰博基尼"></property>
+  <property name="color" value="黄色"></property>
+  </bean>
+  
+  <!-- ================================================================================== -->
+  
+  <!-- 构造函数注入 -->
+  <bean name="user2" class="com.sky.bean.User">
+  <!-- name属性：构造参数的参数名
+       index属性：构造参数的参数索引
+       type属性：构造函数的参数类型 -->
+  <constructor-arg name="name" value="jerry" index="0" type="java.lang.String"></constructor-arg>
+  <constructor-arg name="car" ref="car"></constructor-arg>
+  </bean>
+  
+  <!-- ================================================================================== -->
+  <!--复杂类型注入  -->
+ 
+  <bean name="cb" class="com.sky.c_injection.CollectionBean">
+  <!--如果数组中只准备注入一个值（对象），直接使用value|ref即可  
+  <property name="arr" value="tom"></property>
+  -->
+   <!--array注入，多个元素注入  -->
+        <property name="arr">
+          <array>
+            <value>tom</value>
+            <value>jerry</value>
+            <ref bean="user"/>
+          </array>
+        </property>
+      <!--如果list中只准备注入一个值（对象），直接使用value|ref即可 
+      <property name="list" value="jack"></property> -->
+      
+      <property name="list">
+         <list>
+            <value>jack</value>
+            <value>rose</value>
+            <ref bean="user"/>
+         </list>
+       </property>
+       
+       <!--map类型注入  -->
+        <property name="map">
+         <map>
+            <entry key="url" value="jdbc:mysql://"></entry>
+            <entry key="user" value-ref="user"></entry>
+            <entry key-ref="user" value-ref="user2"></entry>
+         </map>
+       </property>
+       
+      <!--properties类型注入  -->
+        <property name="prop">
+         <props>
+            <prop key="driverClass">com.jdbc.mysql.Driver</prop>
+            <prop key="userName">root</prop>
+            <prop key="password">root</prop>
+         </props>
+       </property>  
+  
+  </bean>
+  
+</beans>

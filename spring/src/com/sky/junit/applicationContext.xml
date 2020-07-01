@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd ">
+
+   <!--将User对象交给spring容器管理 -->
+   <!-- Bean元素：描述需要spring容器管理的对象
+        name属性：被管理的对象名字。根据名名称获得对象。可以重复。可以使用特殊字符
+        class属性：被管理对象的完整类名
+        id属性：名称不可重复。不能使用特殊字符  
+                  尽量使用name属性
+    -->
+   <bean name="user" class="com.sky.bean.User"></bean>
+
+   <!-- 导入其他spring配置文件-->
+   <import resource="com/sky/b_create/applicationContext.xml"></import>
+</beans>
